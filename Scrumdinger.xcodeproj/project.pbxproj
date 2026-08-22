@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84B76A50302ED4B9003C9A9B /* ThemeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84B76A4F302ED4B9003C9A9B /* ThemeKit */; };
+		84D75ED030395D3800425521 /* TimerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84D75ECF30395D3800425521 /* TimerKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B76A50302ED4B9003C9A9B /* ThemeKit in Frameworks */,
+				84D75ED030395D3800425521 /* TimerKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			name = Scrumdinger;
 			packageProductDependencies = (
 				84B76A4F302ED4B9003C9A9B /* ThemeKit */,
+				84D75ECF30395D3800425521 /* TimerKit */,
 			);
 			productName = Scrumdinger;
 			productReference = 84BCE092302D6F9F001AA19A /* Scrumdinger.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				84B76A4E302ED4B9003C9A9B /* XCLocalSwiftPackageReference "ThemeKit" */,
+				84D75ECE30395D3800425521 /* XCLocalSwiftPackageReference "../../Downloads/ManagingStateAndLifeCycle/StartingProject/TutorialResources/TimerKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84BCE093302D6F9F001AA19A /* Products */;
@@ -343,12 +347,20 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ThemeKit;
 		};
+		84D75ECE30395D3800425521 /* XCLocalSwiftPackageReference "../../Downloads/ManagingStateAndLifeCycle/StartingProject/TutorialResources/TimerKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Downloads/ManagingStateAndLifeCycle/StartingProject/TutorialResources/TimerKit;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		84B76A4F302ED4B9003C9A9B /* ThemeKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ThemeKit;
+		};
+		84D75ECF30395D3800425521 /* TimerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimerKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
