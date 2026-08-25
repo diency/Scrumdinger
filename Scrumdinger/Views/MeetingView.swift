@@ -9,9 +9,11 @@ import SwiftUI
 import ThemeKit
 import TimerKit
 import AVFoundation
+import SwiftData
 
 struct MeetingView: View {
-    @Binding var scrum: DailyScrum
+    @Environment(\.modelContext) private var context
+    let scrum: DailyScrum
     @State var scrumTimer = ScrumTimer()
     
     private let player = AVPlayer.dingPlayer()
@@ -21,29 +23,40 @@ struct MeetingView: View {
             RoundedRectangle(cornerRadius: 16.0).fill(scrum.theme.mainColor)
             VStack{
                 MeetingHeaderView(secondsElapsed: scrumTimer.secondsElapsed,
-                                                  secondsRemaining: scrumTimer.secondsRemaining,
-                                                  theme: scrum.theme)
+                  secondsRemaining: scrumTimer.secondsRemaining,
+                  theme: scrum.theme)
                 Circle().strokeBorder(lineWidth: 24)
                 MeetingFooterView(speakers: scrumTimer.speakers, skipAction: scrumTimer.skipSpeaker)
             }
         }.padding()
             .foregroundColor(scrum.theme.accentColor)
             .onAppear {
-                scrumTimer.reset(lengthInMinutes: scrum.lengthInMinutes, attendeeNames: scrum.attendees.map { $0.name })
-                scrumTimer.speakerChangedAction = {
-                    player.seek(to: .zero)
-                    player.play()
-                }
-                scrumTimer.startScrum()
+                startScrum()
             }
             .onDisappear {
-                scrumTimer.stopScrum()
+                endScrum()
             }
             .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func startScrum() {
+        scrumTimer.reset(lengthInMinutes: scrum.lengthInMinutes, attendeeNames: scrum.attendees.map { $0.name })
+        scrumTimer.speakerChangedAction = {
+            player.seek(to: .zero)
+            player.play()
+        }
+        scrumTimer.startScrum()
+    }
+    
+    private func endScrum() {
+        scrumTimer.stopScrum()
+        let newHistory = History(attendees: scrum.attendees)
+        scrum.history.insert(newHistory, at: 0)
+        try? context.save()
     }
 }
 
 #Preview {
-    @Previewable @State var scrum = DailyScrum.sampleData[0]
-    MeetingView(scrum: $scrum)
+    let scrum = DailyScrum.sampleData[0]
+    MeetingView(scrum: scrum)
 }
