@@ -15,6 +15,8 @@ struct ScrumdingerApp: App {
         WindowGroup {
             ScrumsView()
         }
-        .modelContainer(for: DailyScrum.self)
+        //.modelContainer(for: DailyScrum.self)
+        //for error testing
+        .modelContainer(try! .init(for: DailyScrum.self, configurations: .init(allowsSave: false)))
     }
 }
